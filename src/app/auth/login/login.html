@@ -1,8 +1,25 @@
-<div class="container mt-5">
-  <h2>Login</h2>
+<div class="container mt-5" style="max-width: 400px;">
+  <h2 class="text-center mb-3">Login</h2>
 
-  <input class="form-control mb-2" [(ngModel)]="email" placeholder="Email">
-  <input class="form-control mb-2" [(ngModel)]="password" type="password" placeholder="Password">
+  <input
+    type="email"
+    class="form-control mb-2"
+    placeholder="Email"
+    [(ngModel)]="email"
+  />
 
-  <button class="btn btn-primary w-100" (click)="login()">Login</button>
+  <input
+    type="password"
+    class="form-control mb-3"
+    placeholder="Password"
+    [(ngModel)]="password"
+  />
+
+  <button class="btn btn-primary w-100" (click)="login()">
+    Login
+  </button>
+
+  <div class="text-center mt-3">
+    <a routerLink="/register">New user? Register</a>
+  </div>
 </div>

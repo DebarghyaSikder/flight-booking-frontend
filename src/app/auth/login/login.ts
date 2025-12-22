@@ -9,7 +9,8 @@ import { TokenService } from '../../core/services/token.service';
   selector: 'app-login',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './login.component.html'
+  templateUrl: './login.html',
+  styleUrls: ['./login.css']
 })
 export class LoginComponent {
 
@@ -26,9 +27,14 @@ export class LoginComponent {
     this.authService.login({
       email: this.email,
       password: this.password
-    }).subscribe((res: any) => {
-      this.tokenService.save(res.token);
-      this.router.navigate(['/']);
+    }).subscribe({
+      next: (res: any) => {
+        this.tokenService.save(res.token);
+        this.router.navigate(['/']);
+      },
+      error: () => {
+        alert('Invalid credentials');
+      }
     });
   }
 }
