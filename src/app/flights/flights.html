@@ -1,0 +1,43 @@
+<h2>Search Flights</h2>
+
+<div>
+  <input placeholder="From" [(ngModel)]="source" />
+  <input placeholder="To" [(ngModel)]="destination" />
+  <button (click)="search()">Search</button>
+</div>
+
+<p *ngIf="loading">Loading...</p>
+<p *ngIf="!loading && flights.length === 0">No flights found</p>
+
+<table *ngIf="flights.length" border="1" cellpadding="8">
+  <tr>
+    <th>Airline</th>
+    <th>Route</th>
+    <th>Departure</th>
+    <th>Arrival</th>
+    <th>Price</th>
+    <th>Seats</th>
+    <th>Book</th>
+  </tr>
+
+  <tr *ngFor="let f of flights">
+    <td>{{ f.airline }}</td>
+    <td>{{ f.source }} → {{ f.destination }}</td>
+    <td>{{ f.departureTime }}</td>
+    <td>{{ f.arrivalTime }}</td>
+    <td>₹{{ f.price }}</td>
+    <td>{{ f.availableSeats }}</td>
+
+    <td>
+      <input
+        type="number"
+        min="1"
+        [max]="f.availableSeats"
+        [(ngModel)]="seatsMap[f.id]"
+        placeholder="Seats"
+        style="width:60px"
+      />
+      <button (click)="bookFlight(f)">Book</button>
+    </td>
+  </tr>
+</table>
