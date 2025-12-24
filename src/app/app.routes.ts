@@ -14,5 +14,13 @@ export const routes: Routes = [
       import('./flights/flights').then(m => m.FlightsComponent)
   },
 
+  // ✅ ADD THIS ROUTE
+  {
+    path: 'my-bookings',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./bookings/bookings').then(m => m.BookingsComponent)
+  },
+
   { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];

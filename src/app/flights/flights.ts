@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FlightService } from './flight.service';
 import { HttpClient } from '@angular/common/http';
+import { TokenService } from '../core/services/token.service';
 
 @Component({
   selector: 'app-flights',
@@ -22,9 +23,14 @@ export class FlightsComponent {
   seatsMap: Record<number, number> = {}; // flightId → seats
 
   constructor(
-    private flightService: FlightService,
-    private http: HttpClient
-  ) {}
+  private flightService: FlightService,
+  private http: HttpClient,
+  private tokenService: TokenService
+) {}
+
+get isUser(): boolean {
+  return this.tokenService.getRole() === 'USER';
+}
 
   search() {
     this.loading = true;

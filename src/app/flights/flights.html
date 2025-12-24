@@ -29,15 +29,22 @@
     <td>{{ f.availableSeats }}</td>
 
     <td>
-      <input
-        type="number"
-        min="1"
-        [max]="f.availableSeats"
-        [(ngModel)]="seatsMap[f.id]"
-        placeholder="Seats"
-        style="width:60px"
-      />
-      <button (click)="bookFlight(f)">Book</button>
-    </td>
+  <ng-container *ngIf="isUser; else adminView">
+    <input
+      type="number"
+      min="1"
+      [max]="f.availableSeats"
+      [(ngModel)]="seatsMap[f.id]"
+      placeholder="Seats"
+      style="width:60px"
+    />
+    <button (click)="bookFlight(f)">Book</button>
+  </ng-container>
+
+  <ng-template #adminView>
+    <span style="color:gray">Admin view</span>
+  </ng-template>
+</td>
+
   </tr>
 </table>

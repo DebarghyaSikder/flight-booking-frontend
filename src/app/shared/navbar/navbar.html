@@ -1,0 +1,24 @@
+<nav class="navbar">
+  <span class="brand">✈ Flight Booking App</span>
+
+  <span *ngIf="tokenService.isLoggedIn()">
+    Logged in as: {{ email }}
+  </span>
+
+  <div class="links" *ngIf="tokenService.isLoggedIn()">
+
+    <a routerLink="/flights">Flights</a>
+
+    <!-- USER ONLY -->
+    <a *ngIf="role === 'USER'" routerLink="/my-bookings">
+      My Bookings
+    </a>
+
+    <!-- ADMIN ONLY -->
+    <a *ngIf="role === 'ADMIN'" routerLink="/add-flight">
+      Add Flight
+    </a>
+
+    <button (click)="logout()">Logout</button>
+  </div>
+</nav>

@@ -20,4 +20,25 @@ export class TokenService {
   isLoggedIn(): boolean {
     return !!this.get();
   }
+
+  // ✅ NEW: decode JWT
+  private decodeToken(): any | null {
+    const token = this.get();
+    if (!token) return null;
+
+    try {
+      const payload = token.split('.')[1];
+      return JSON.parse(atob(payload));
+    } catch {
+      return null;
+    }
+  }
+
+  getRole(): string | null {
+    return this.decodeToken()?.role || null;
+  }
+
+  getEmail(): string | null {
+    return this.decodeToken()?.sub || null;
+  }
 }
