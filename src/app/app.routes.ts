@@ -22,5 +22,11 @@ export const routes: Routes = [
       import('./bookings/bookings').then(m => m.BookingsComponent)
   },
 
+  {
+  path: 'seats/:flightId',
+  loadComponent: () =>
+    import('./seats/seat-map/seat-map').then(m => m.SeatMapComponent)
+},
+
   { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];

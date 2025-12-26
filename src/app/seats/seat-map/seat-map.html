@@ -1,0 +1,23 @@
+<h2>Choose Your Seats — Flight {{ flightId }}</h2>
+
+<div *ngIf="loading" class="spinner"></div>
+
+<div class="seat-grid">
+  <div
+    *ngFor="let seat of seats"
+    class="seat"
+    [ngClass]="{
+      'booked': seat.booked,
+      'selected': selectedSeats.includes(seat.seatNumber)
+    }"
+    (click)="toggleSeat(seat)"
+  >
+    {{ seat.seatNumber }}
+  </div>
+</div>
+
+<button class="confirm-btn"
+        [disabled]="selectedSeats.length === 0"
+        (click)="confirmSelection()">
+  Confirm Seats
+</button>

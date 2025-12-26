@@ -1,39 +1,73 @@
+/* ===== NAVBAR STYLING ===== */
+
 .navbar {
-  background: #007bff;
-  color: white;
-  padding: 12px 20px;
+  background: #0057ff;
+  padding: 12px 24px;
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.links a {
-  color: white;
-  margin-right: 15px;
-  text-decoration: none;
-  padding: 6px 12px;
-  border-radius: 4px;
-  transition: 0.2s;
-}
-
-.links a:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-button {
-  background: #dc3545;
-  border: none;
-  padding: 6px 12px;
-  color: white;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #c82333;
-}
-
 .brand {
-  font-weight: bold;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logged-as {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+/* ===== NAV BUTTONS ===== */
+
+.nav-btn {
+  background: white;
+  color: #0057ff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.nav-btn:hover {
+  background: #e7edff;
+}
+
+/* Highlight Primary Action: Register */
+.nav-primary {
+  background: #0040cc;
+  color: #fff;
+}
+
+.nav-primary:hover {
+  background: #002b8a;
+}
+
+/* Logout button red */
+.logout-btn {
+  background: #d9534f;
+  color: #fff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.logout-btn:hover {
+  background: #b32e2b;
+}
+
+

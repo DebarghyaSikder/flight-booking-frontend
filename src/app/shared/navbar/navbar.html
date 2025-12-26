@@ -1,33 +1,29 @@
 <nav class="navbar">
-  <span class="brand">✈ Flight Booking App</span>
+  <span class="brand">✈ FlightBooking</span>
 
-  <span *ngIf="tokenService.isLoggedIn()">
-    Logged in as: {{ email }}
-  </span>
+  <!-- USER LOGGED IN -->
+  <div class="nav-right" *ngIf="tokenService.isLoggedIn()">
 
-  <!-- Navigation links when user is logged in -->
-  <div class="links" *ngIf="tokenService.isLoggedIn()">
+    <span class="logged-as">Logged in as: {{ email }}</span>
 
-    <a routerLink="/flights">Flights</a>
+    <a routerLink="/flights" class="nav-btn">Flights</a>
 
     <!-- USER ONLY -->
-    <a *ngIf="role === 'USER'" routerLink="/my-bookings">
+    <a *ngIf="role === 'USER'" routerLink="/my-bookings" class="nav-btn">
       My Bookings
     </a>
 
     <!-- ADMIN ONLY -->
-    <a *ngIf="role === 'ADMIN'" routerLink="/add-flight">
+    <a *ngIf="role === 'ADMIN'" routerLink="/add-flight" class="nav-btn">
       Add Flight
     </a>
 
-    <button (click)="logout()">Logout</button>
-
+    <button class="logout-btn" (click)="logout()">Logout</button>
   </div>
 
-  <!-- If user not logged in -->
-  <div class="links" *ngIf="!tokenService.isLoggedIn()">
-    <a routerLink="/login">Login</a>
-    <a routerLink="/register">Register</a>
+  <!-- USER NOT LOGGED IN -->
+  <div class="nav-right" *ngIf="!tokenService.isLoggedIn()">
+    <a routerLink="/login" class="nav-btn">Login</a>
+    <a routerLink="/register" class="nav-btn nav-primary">Register</a>
   </div>
-
 </nav>

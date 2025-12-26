@@ -1,15 +1,42 @@
-<h2>Search Flights</h2>
+<h2 class="title">Search Flights</h2>
 
-<div>
-  <input placeholder="From" [(ngModel)]="source" />
-  <input placeholder="To" [(ngModel)]="destination" />
-  <button (click)="search()">Search</button>
+<div class="search-box">
+  <input placeholder="From" [(ngModel)]="source" class="search-input" />
+  <input placeholder="To" [(ngModel)]="destination" class="search-input" />
+
+  <!-- 🆕 DATE INPUT -->
+  <input
+  type="date"
+  [(ngModel)]="travelDate"
+  class="search-input"
+  placeholder="Travel Date"
+  aria-label="Travel Date"
+/>
+
+
+  <button (click)="search()" class="search-btn">Search</button>
 </div>
 
-<!-- Show loading only when actively fetching -->
-<p *ngIf="loading">Loading...</p>
+<!-- 🆕 RECENT SEARCHES -->
+<div *ngIf="recentSearches.length > 0" class="recent-wrapper">
+  <strong>Recent Searches:</strong>
+  <div class="recent-list">
+    <button
+      *ngFor="let s of recentSearches"
+      (click)="useSearch(s)"
+      class="recent-item"
+    >
+      {{ s.source }} → {{ s.destination }} | {{ s.date }}
+    </button>
+  </div>
+</div>
 
-<!-- Show no flights only after searching -->
+<!-- 🌀 Spinner -->
+<div *ngIf="loading" class="spinner-container">
+  <div class="spinner"></div>
+</div>
+
+<!-- No flights -->
 <p *ngIf="!loading && flights.length === 0 && source && destination">
   No flights found.
 </p>
@@ -34,22 +61,21 @@
     <td>{{ f.availableSeats }}</td>
 
     <td>
-  <ng-container *ngIf="isUser; else adminView">
-    <input
-      type="number"
-      min="1"
-      [max]="f.availableSeats"
-      [(ngModel)]="seatsMap[f.id]"
-      placeholder="Seats"
-      style="width:60px"
-    />
-    <button (click)="bookFlight(f)">Book</button>
-  </ng-container>
+      <ng-container *ngIf="isUser; else adminView">
+        <input
+          type="number"
+          min="1"
+          [max]="f.availableSeats"
+          [(ngModel)]="seatsMap[f.id]"
+          placeholder="Seats"
+          class="seats-input"
+        />
+        <button (click)="bookFlight(f)" class="book-btn">Book</button>
+      </ng-container>
 
-  <ng-template #adminView>
-    <span style="color:gray">Admin view</span>
-  </ng-template>
-</td>
-
+      <ng-template #adminView>
+        <span class="admin-text">Admin view</span>
+      </ng-template>
+    </td>
   </tr>
 </table>
