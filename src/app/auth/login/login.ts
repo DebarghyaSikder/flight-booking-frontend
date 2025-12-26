@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { TokenService } from '../../core/services/token.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule, RouterModule],
   templateUrl: './login.html',
   styleUrls: ['./login.css']
 })
@@ -30,7 +31,7 @@ export class LoginComponent {
     }).subscribe({
       next: (res: any) => {
         this.tokenService.save(res.token);
-        this.router.navigate(['/']);
+        this.router.navigate(['/flights']);
       },
       error: () => {
         alert('Invalid credentials');

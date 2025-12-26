@@ -1,32 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { RouterModule } from '@angular/router';   
 import { TokenService } from '../../core/services/token.service';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './navbar.html',
   styleUrls: ['./navbar.css']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
+  email = '';
+  role = '';
 
-  constructor(
-    public tokenService: TokenService,
-    private router: Router
-  ) {}
+  constructor(public tokenService: TokenService) {}
+
+  ngOnInit(): void {
+    this.email = localStorage.getItem('user_email') ?? '';
+    this.role = localStorage.getItem('user_role') ?? '';
+  }
 
   logout() {
     this.tokenService.clear();
-    this.router.navigate(['/login']);
-  }
-
-  get role() {
-    return this.tokenService.getRole();
-  }
-
-  get email() {
-    return this.tokenService.getEmail();
+    localStorage.removeItem('user_email');
+    localStorage.removeItem('user_role');
+    window.location.href = '/login';
   }
 }

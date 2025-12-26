@@ -6,8 +6,13 @@
   <button (click)="search()">Search</button>
 </div>
 
+<!-- Show loading only when actively fetching -->
 <p *ngIf="loading">Loading...</p>
-<p *ngIf="!loading && flights.length === 0">No flights found</p>
+
+<!-- Show no flights only after searching -->
+<p *ngIf="!loading && flights.length === 0 && source && destination">
+  No flights found.
+</p>
 
 <table *ngIf="flights.length" border="1" cellpadding="8">
   <tr>

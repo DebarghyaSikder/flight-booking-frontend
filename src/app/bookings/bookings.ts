@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BookingService } from './booking';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-bookings',
@@ -15,7 +16,7 @@ export class BookingsComponent implements OnInit {
   loading = true;
   error = '';
 
-  constructor(private bookingService: BookingService) {}
+  constructor(private bookingService: BookingService, private router: Router) {}
 
   ngOnInit(): void {
     this.bookingService.getMyBookings().subscribe({
@@ -23,8 +24,17 @@ export class BookingsComponent implements OnInit {
         this.bookings = data;
         this.loading = false;
       },
-      error: () => {
-        this.error = 'Failed to load bookings';
+      error: (err) => {
+        console.error(err);
+
+        if (err.status === 401) {
+          this.error = 'Session expired. Please log in again.';
+          // Optional redirect:
+          // this.router.navigate(['/login']);
+        } else {
+          this.error = 'Failed to load bookings';
+        }
+
         this.loading = false;
       }
     });

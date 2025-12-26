@@ -5,6 +5,7 @@
     Logged in as: {{ email }}
   </span>
 
+  <!-- Navigation links when user is logged in -->
   <div class="links" *ngIf="tokenService.isLoggedIn()">
 
     <a routerLink="/flights">Flights</a>
@@ -20,5 +21,13 @@
     </a>
 
     <button (click)="logout()">Logout</button>
+
   </div>
+
+  <!-- If user not logged in -->
+  <div class="links" *ngIf="!tokenService.isLoggedIn()">
+    <a routerLink="/login">Login</a>
+    <a routerLink="/register">Register</a>
+  </div>
+
 </nav>
